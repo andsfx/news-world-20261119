@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>THE WORLD IN ONE DAY — 19 NOVEMBER 2026</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1024px; height: 1024px; overflow: hidden; }
+  body {
+    font-family: 'DejaVu Sans', sans-serif;
+    background: #08090c;
+    color: #f2efe8;
+  }
+  .canvas { position: relative; width: 1024px; height: 1024px; overflow: hidden;
+    background:
+      radial-gradient(ellipse 820px 420px at 50% 40%, rgba(190,28,28,0.30), rgba(190,28,28,0) 72%),
+      linear-gradient(180deg, #191c22 0%, #0e1116 55%, #0a0c10 100%);
+  }
+
+  /* ---------- header ---------- */
+  header { position: absolute; top: 0; left: 0; width: 1024px; padding: 24px 38px 0 38px; }
+  .kicker {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-size: 20px; font-weight: 700; letter-spacing: 5px; color: #ff4033;
+    border-bottom: 3px solid #ff4033; padding-bottom: 9px;
+  }
+  .kicker .right { color: #c4bfb4; letter-spacing: 3px; font-size: 18px; }
+  .date {
+    margin-top: 12px; white-space: nowrap;
+    font-size: 53px; font-weight: 700; line-height: 1; letter-spacing: -1px;
+    color: #ffffff;
+  }
+  .date .red { color: #ff4033; }
+  .sub {
+    margin-top: 9px;
+    font-size: 24px; font-weight: 700; letter-spacing: 8px; color: #d8d2c5;
+  }
+
+  /* ---------- hero ---------- */
+  .hero-tag {
+    position: absolute; top: 216px; left: 38px;
+    background: #ff4033; color: #08090c;
+    font-size: 21px; font-weight: 700; letter-spacing: 3px; padding: 7px 13px 5px 13px;
+  }
+  .hero-title {
+    position: absolute; top: 264px; left: 34px; width: 960px; white-space: nowrap;
+    font-size: 52px; font-weight: 700; line-height: 1; letter-spacing: -0.5px; color: #ffffff;
+  }
+  .hero-title .thin { color: #ff4033; }
+  .hero-sub {
+    position: absolute; top: 336px; left: 38px; width: 960px; white-space: nowrap;
+    font-size: 20px; font-weight: 700; letter-spacing: 1.6px; color: #c9c3b6;
+  }
+
+  .hero { position: absolute; top: 372px; left: 0; width: 1024px; height: 328px; }
+  .hlines { position: absolute; inset: 0; overflow: hidden; }
+  .hlines div { position: absolute; left: 0; width: 1024px; height: 1px; background: rgba(255,255,255,0.05); }
+  .glow {
+    position: absolute; left: 50%; bottom: 110px; width: 860px; height: 280px; transform: translateX(-50%);
+    background: radial-gradient(ellipse at center, rgba(255,64,51,0.34), rgba(255,64,51,0) 66%);
+  }
+  .figures { position: absolute; left: 0; bottom: 0; width: 1024px; height: 328px; }
+  .fig { position: absolute; bottom: 0; width: 210px; height: 328px; }
+  .fig svg { position: absolute; top: 0; left: 0; display: block; width: 210px; height: 298px; }
+  .f-trump { left: 88px; }
+  .f-putin { left: 407px; }
+  .f-xi    { left: 726px; }
+  .c-trump { color: #64a9ff; }
+  .c-putin { color: #ff5f52; }
+  .c-xi    { color: #ffc233; }
+  .fig-label {
+    position: absolute; bottom: 0; width: 210px; text-align: center; font-size: 19px;
+    font-weight: 700; letter-spacing: 4px;
+  }
+  .fig-label span { background: rgba(10,12,16,0.92); padding: 3px 10px; }
+  .plinth {
+    position: absolute; left: 64px; right: 64px; bottom: 26px; height: 4px;
+    background: linear-gradient(90deg, rgba(255,64,51,0), #ff4033 16%, #ff4033 84%, rgba(255,64,51,0));
+  }
+
+  /* ---------- strips ---------- */
+  .strip { position: absolute; top: 700px; left: 0; width: 1024px; height: 274px;
+    display: flex; border-top: 3px solid #2e323a; background: rgba(8,9,12,0.72); }
+  .cell { position: relative; flex: 1 1 0; padding: 14px 15px 0 15px; border-right: 1px solid #24282f; }
+  .cell:last-child { border-right: none; }
+  .cell .num { font-size: 86px; font-weight: 700; line-height: 0.95; letter-spacing: -4px; color: #ff4033; height: 82px; }
+  .cell .num small { font-size: 34px; letter-spacing: 0; margin-left: 4px; }
+  .cell .lab { margin-top: 6px; font-size: 23px; font-weight: 700; letter-spacing: 0.8px; color: #ffffff; white-space: nowrap; }
+  .cell .txt { margin-top: 7px; font-size: 21px; font-weight: 700; line-height: 1.18; color: #b6b1a6; }
+  .cell .txt b { color: #ece6da; }
+  .cell.amber .num, .cell.amber .num small { color: #ffc233; }
+
+  .statline { position: absolute; top: 902px; left: 15px; width: 994px; height: 58px;
+    border-top: 1px solid #24282f; display: flex; align-items: center; gap: 16px;
+    font-size: 16px; font-weight: 700; letter-spacing: 0.6px; color: #918c83; white-space: nowrap; }
+  .statline b { color: #ffc233; font-size: 26px; letter-spacing: -0.5px; margin-right: 5px; }
+  .statline i { color: #e8e2d6; font-style: normal; }
+
+  footer { position: absolute; bottom: 0; left: 0; width: 1024px; height: 50px;
+    background: #ff4033; color: #08090c;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 34px;
+    font-size: 17px; font-weight: 700; letter-spacing: 1.2px; white-space: nowrap; }
+  footer span { max-width: 100%; }
+</style>
+</head>
+<body>
+<div class="canvas">
+
+  <header>
+    <div class="kicker"><span>THE WORLD IN ONE DAY</span><span class="right">DAILY BRIEF · NO. 19</span></div>
+    <div class="date">THURSDAY, 19 <span class="red">NOVEMBER</span> 2026</div>
+    <div class="sub">SIX STORIES THAT MOVED THE WORLD</div>
+  </header>
+
+  <div class="hero-tag">APEC SHENZHEN</div>
+  <div class="hero-title">FIRST-EVER <span class="thin">TRILATERAL</span> SUMMIT</div>
+  <div class="hero-sub">TRUMP · PUTIN · XI FACE TO FACE — NUCLEAR ARMS, IRAN, UKRAINE</div>
+
+  <section class="hero">
+    <div class="hlines"><div style="top:70px"></div><div style="top:140px"></div><div style="top:210px"></div><div style="top:280px"></div></div>
+    <div class="glow"></div>
+
+    <div class="figures">
+      <div class="plinth"></div>
+
+      <div class="fig f-trump">
+        <svg viewBox="0 0 230 362">
+          <path d="M115 16 C 146 16 162 38 160 68 C 159 84 152 96 141 104 L 141 114 C 152 118 158 126 160 138 L 160 150
+                   C 188 160 202 184 205 222 L 208 300 L 197 300 L 193 224 C 189 200 179 186 160 180
+                   C 188 212 192 252 184 300 L 172 330 L 140 330 L 130 300 L 115 300 L 112 330 L 78 330 L 72 300
+                   L 60 300 L 56 330 L 24 330 L 30 300 C 28 252 46 212 62 180 C 42 188 32 202 29 226 L 25 300 L 14 300 L 17 222
+                   C 20 184 34 160 62 150 L 62 138 C 64 126 70 118 81 114 L 81 104 C 70 96 63 84 62 68 C 60 38 78 16 115 16 Z"
+                fill="#ece7db"/>
+          <path d="M70 64 C 80 44 96 38 115 38 C 134 38 150 44 160 64 C 152 54 140 48 115 48 C 90 48 78 54 70 64 Z" fill="#b9b2a2"/>
+          <path d="M97 126 L 115 156 L 133 126" fill="none" stroke="#64a9ff" stroke-width="10"/>
+          <path d="M115 156 L 115 300" stroke="#64a9ff" stroke-width="8"/>
+        </svg>
+        <div class="fig-label c-trump"><span>TRUMP</span></div>
+      </div>
+
+      <div class="fig f-putin">
+        <svg viewBox="0 0 230 362">
+          <path d="M115 24 C 138 24 151 42 149 66 C 148 78 144 88 137 96 L 137 106 C 147 110 153 120 155 134 L 155 148
+                   C 181 158 193 182 195 218 L 197 362 L 150 362 L 146 218 L 136 300 L 140 362 L 90 362 L 94 300 L 84 218 L 80 362 L 33 362 L 35 218
+                   C 37 182 49 158 75 148 L 75 134 C 77 120 83 110 93 106 L 93 96 C 86 88 82 78 81 66 C 79 42 92 24 115 24 Z"
+                fill="#bab3a3"/>
+          <path d="M75 66 C 79 40 96 28 115 28 C 134 28 151 40 155 66 C 151 52 137 42 115 42 C 93 42 79 52 75 66 Z" fill="#8f897c"/>
+          <path d="M95 130 L 115 148 L 135 130" fill="none" stroke="#ff5f52" stroke-width="8"/>
+        </svg>
+        <div class="fig-label c-putin"><span>PUTIN</span></div>
+      </div>
+
+      <div class="fig f-xi">
+        <svg viewBox="0 0 230 362">
+          <path d="M115 20 C 147 20 163 40 161 68 C 160 84 151 96 139 102 L 139 112 C 149 116 155 126 157 140 L 157 154
+                   C 186 164 200 188 202 226 L 204 300 L 193 300 L 189 230 C 185 206 175 192 157 186
+                   C 183 218 187 254 177 300 L 169 330 L 139 330 L 129 300 L 115 300 L 110 330 L 74 330 L 70 300
+                   L 56 300 L 52 330 L 23 330 L 27 300 C 25 254 39 218 59 186 C 41 192 31 206 27 230 L 23 300 L 13 300 L 15 226
+                   C 17 188 31 164 59 154 L 59 140 C 61 126 67 116 78 112 L 78 102 C 66 96 56 84 55 68 C 53 40 83 20 115 20 Z"
+                fill="#dcd6c9"/>
+          <path d="M63 62 C 73 40 93 32 115 32 C 137 32 157 40 167 62 C 157 46 139 42 115 42 C 91 42 73 46 63 62 Z" fill="#a49d8e"/>
+          <path d="M81 156 C 81 214 89 258 99 300 M 149 156 C 149 214 141 258 131 300" stroke="#ffc233" stroke-width="7" fill="none"/>
+        </svg>
+        <div class="fig-label c-xi"><span>XI</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip">
+    <div class="cell">
+      <div class="num">3<small>TANKERS</small></div>
+      <div class="lab">HORMUZ · ABLAZE</div>
+      <div class="txt">SEA MINES EAST OF THE STRAIT</div>
+    </div>
+    <div class="cell">
+      <div class="num">0<small>SHIPPED</small></div>
+      <div class="lab">NVIDIA · HOPPER</div>
+      <div class="txt">CHIPS TO CHINA HALTED</div>
+    </div>
+    <div class="cell amber">
+      <div class="num">100–0</div>
+      <div class="lab">EPSTEIN FILES</div>
+      <div class="txt">SENATE: OPEN THE ARCHIVES</div>
+    </div>
+    <div class="cell">
+      <div class="num">19<small>DEAD</small></div>
+      <div class="lab">SIBERIA · CRASH</div>
+      <div class="txt">RUSSIAN MILITARY TRANSPORT</div>
+    </div>
+  </section>
+
+  <div class="statline">
+    <span><b>1</b>KILLED, TANKER HIT OFF OMAN</span>
+    <span><b>9</b>DEAD, FLORIDA JET CRASH</span>
+    <span><b>+</b><i>RIYADH BLAST · AI RISK WARNING</i></span>
+  </div>
+
+  <footer>
+    <span>THE WORLD IN ONE DAY · THURSDAY 19 NOVEMBER 2026</span>
+    <span>DAILY BRIEF · NO. 19</span>
+  </footer>
+</div>
+</body>
+</html>
