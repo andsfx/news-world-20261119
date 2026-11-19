@@ -36,6 +36,12 @@
     font-size: 24px; font-weight: 700; letter-spacing: 8px; color: #d8d2c5;
   }
 
+
+  .flagchip { position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+    width: 62px; height: 40px; border-radius: 3px; overflow: hidden;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.16), 0 3px 10px rgba(0,0,0,0.55); }
+  .flagchip svg { width: 62px !important; height: 40px !important; display: block; position: static !important; }
+
   /* ---------- hero ---------- */
   .hero-tag {
     position: absolute; top: 216px; left: 38px;
@@ -61,7 +67,7 @@
   }
   .figures { position: absolute; left: 0; bottom: 0; width: 1024px; height: 328px; }
   .fig { position: absolute; bottom: 0; width: 210px; height: 328px; }
-  .fig svg { position: absolute; top: 0; left: 0; display: block; width: 210px; height: 298px; }
+  .fig > svg { position: absolute; top: 0; left: 0; display: block; width: 210px; height: 298px; }
   .f-trump { left: 88px; }
   .f-putin { left: 407px; }
   .f-xi    { left: 726px; }
@@ -84,6 +90,8 @@
   .cell { position: relative; flex: 1 1 0; padding: 14px 15px 0 15px; border-right: 1px solid #24282f; }
   .cell:last-child { border-right: none; }
   .cell .num { font-size: 86px; font-weight: 700; line-height: 0.95; letter-spacing: -4px; color: #ff4033; height: 82px; }
+  .cell .num.num4 { font-size: 56px !important; letter-spacing: -0.5px !important; line-height: 82px !important; height: 82px !important; overflow: visible !important; }
+  
   .cell .num small { font-size: 34px; letter-spacing: 0; margin-left: 4px; }
   .cell .lab { margin-top: 6px; font-size: 23px; font-weight: 700; letter-spacing: 0.8px; color: #ffffff; white-space: nowrap; }
   .cell .txt { margin-top: 7px; font-size: 21px; font-weight: 700; line-height: 1.18; color: #d3cec2; }
@@ -91,6 +99,8 @@
   .cell.amber .num, .cell.amber .num small { color: #ffc233; }
   .cell:first-child { background: rgba(255,64,51,0.07); }
 
+  .tk { display:inline-block; padding-right: 18px; }
+  .tk + .tk { border-left: 1px solid rgba(255,255,255,0.22); padding-left: 18px; }
   .statline { position: absolute; top: 902px; left: 15px; width: 994px; height: 58px;
     border-top: 1px solid #24282f; display: flex; align-items: center; gap: 16px;
     font-size: 16px; font-weight: 700; letter-spacing: 0.6px; color: #918c83; white-space: nowrap; }
@@ -125,6 +135,12 @@
       <div class="plinth"></div>
 
       <div class="fig f-trump">
+        <div class="flagchip"><svg viewBox="0 0 46 30" preserveAspectRatio="none">
+<rect width="46" height="30" fill="#f2f0ea"/>
+<g fill="#c8342c"><rect y="0" width="46" height="2.3"/><rect y="4.6" width="46" height="2.3"/><rect y="9.2" width="46" height="2.3"/><rect y="13.8" width="46" height="2.3"/><rect y="18.4" width="46" height="2.3"/><rect y="23" width="46" height="2.3"/><rect y="27.6" width="46" height="2.4"/></g>
+<rect width="19" height="16.2" fill="#1c3f7c"/>
+<g fill="#f2f0ea"><circle cx="4" cy="3.4" r="1.05"/><circle cx="9.5" cy="3.4" r="1.05"/><circle cx="15" cy="3.4" r="1.05"/><circle cx="6.7" cy="7" r="1.05"/><circle cx="12.2" cy="7" r="1.05"/><circle cx="4" cy="10.6" r="1.05"/><circle cx="9.5" cy="10.6" r="1.05"/><circle cx="15" cy="10.6" r="1.05"/><circle cx="6.7" cy="14.2" r="1.05"/><circle cx="12.2" cy="14.2" r="1.05"/></g>
+</svg></div>
         <svg viewBox="0 0 230 362">
           <path d="M115 16 C 146 16 162 38 160 68 C 159 84 152 96 141 104 L 141 114 C 152 118 158 126 160 138 L 160 150
                    C 188 160 202 184 205 222 L 208 300 L 197 300 L 193 224 C 189 200 179 186 160 180
@@ -140,6 +156,9 @@
       </div>
 
       <div class="fig f-putin">
+        <div class="flagchip"><svg viewBox="0 0 46 30" preserveAspectRatio="none">
+<rect width="46" height="10" fill="#f2f0ea"/><rect y="10" width="46" height="10" fill="#1f4f9e"/><rect y="20" width="46" height="10" fill="#c8342c"/>
+</svg></div>
         <svg viewBox="0 0 230 362">
           <path d="M115 24 C 138 24 151 42 149 66 C 148 78 144 88 137 96 L 137 106 C 147 110 153 120 155 134 L 155 148
                    C 181 158 193 182 195 218 L 197 362 L 150 362 L 146 218 L 136 300 L 140 362 L 90 362 L 94 300 L 84 218 L 80 362 L 33 362 L 35 218
@@ -152,6 +171,10 @@
       </div>
 
       <div class="fig f-xi">
+        <div class="flagchip"><svg viewBox="0 0 46 30" preserveAspectRatio="none">
+<rect width="46" height="30" fill="#c8342c"/>
+<g fill="#ffde3d"><path d="M9 4.2 l2.3 6.9 -5.9-4.3 7.3 0 -5.9 4.3z"/><circle cx="17" cy="4.6" r="1.1"/><circle cx="19.4" cy="7.6" r="1.1"/><circle cx="17.4" cy="10.6" r="1.1"/><circle cx="14.6" cy="8.4" r="1.1"/></g>
+</svg></div>
         <svg viewBox="0 0 230 362">
           <path d="M115 20 C 147 20 163 40 161 68 C 160 84 151 96 139 102 L 139 112 C 149 116 155 126 157 140 L 157 154
                    C 186 164 200 188 202 226 L 204 300 L 193 300 L 189 230 C 185 206 175 192 157 186
@@ -179,7 +202,7 @@
       <div class="txt">CHIPS TO CHINA HALTED</div>
     </div>
     <div class="cell amber">
-      <div class="num">100–0</div>
+      <div class="num num4">100-0</div>
       <div class="lab">EPSTEIN FILES</div>
       <div class="txt">SENATE: OPEN THE ARCHIVES</div>
     </div>
